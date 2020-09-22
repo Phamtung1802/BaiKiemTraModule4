@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js}"></script>
+    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css}">
+    <title>Title</title>
+</head>
+<body>
+<main >
+    <div class="container">
+        <br><br><br>
+        <div class="row">
+            <div class="col-lg-2">&nbsp;
+            </div>
+            <div class="col-lg-8 text-center">
+                <a href="/create"><button class="btn-primary">Create New User</button></a>
+                <h1>Users</h1>
+                <table border="1" class="table table-responsive text-justify">
+                    <tr>
+                        <th>User name</th>
+                        <th>Phone Number</th>
+                        <th>Address</th>
+                        <th>Category</th>
+                        <th colspan="2">&nbsp;</th>
+                    </tr>
+                    <th:block th:each="user : ${users}">
+                        <tr>
+                            <td th:text="${user.userName}"></td>
+                            <td th:text="${user.phoneNumber}"></td>
+                            <td th:text="${user.address}"></td>
+                            <td th:text="${user.category.name}"></td>
+                            <td ><a th:href="@{/edit/__${user.id}__ }"><button class="btn btn-primary">Edit</button></a></td>
+                            <td ><a th:href="@{/delete/__${user.id}__ }"><button class="btn btn-primary">Delete</button></a></td>
+                        </tr>
+                    </th:block>
+                </table>
+            </div>
+            <div class="col-lg-2">&nbsp;</div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
