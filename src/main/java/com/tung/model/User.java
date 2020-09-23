@@ -1,6 +1,7 @@
 package com.tung.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -11,11 +12,13 @@ public class User {
     private Long id;
 
     @Column(name = "username")
+    @Size(min = 2, max = 30)
     private String userName;
 
     @Column(name = "address")
     private String address;
 
+    @Size(min = 8, max = 12)
     @Column(name = "phonenumber")
     private String phoneNumber;
 

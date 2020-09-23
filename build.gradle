@@ -19,6 +19,7 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-web', version: '4.3.17.RELEASE'
     compile group: 'org.springframework', name: 'spring-webmvc', version: '4.3.17.RELEASE'
     compile group: 'org.springframework', name: 'spring-orm', version: '4.3.17.RELEASE'
+    compile group: 'org.springframework', name: 'spring-aspects', version: '4.3.25.RELEASE'
 
 
     compile group: 'org.thymeleaf', name: 'thymeleaf-spring4', version: '3.0.9.RELEASE'

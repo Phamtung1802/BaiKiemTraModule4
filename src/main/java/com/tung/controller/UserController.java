@@ -4,6 +4,8 @@ import com.tung.model.Category;
 import com.tung.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,6 +22,7 @@ public class UserController {
         return categoryServiceImpl.findAll();
     }
 
+    @Validated
     @ModelAttribute("users")
     public Iterable<User> users(){
         return userServiceImpl.findAll();
@@ -39,7 +42,12 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public ModelAndView saveUser(@ModelAttribute("user") User user){
+    public ModelAndView saveUser(@Validated @ModelAttribute("user") User user, BindingResult bindingResult){
+        if (bindingResult.hasFieldErrors()) {
+            ModelAndView modelAndView = new ModelAndView("/user/create");
+            modelAndView.addObject("message", "New User Failed");
+            return modelAndView;
+        }
         userServiceImpl.save(user);
         ModelAndView modelAndView = new ModelAndView("/user/create");
         modelAndView.addObject("user", new User());
@@ -63,7 +71,7 @@ public class UserController {
         return modelAndView;
     }
     @PostMapping("/edit/{id}")
-    public ModelAndView save(@ModelAttribute("user") User user,@PathVariable String id){
+    public ModelAndView save(@ModelAttribute("user") User user,@PathVariable String id)  {
         userServiceImpl.save(user);
         ModelAndView modelAndView = new ModelAndView("redirect:/");
         modelAndView.addObject("categories",categoryServiceImpl.findAll());
