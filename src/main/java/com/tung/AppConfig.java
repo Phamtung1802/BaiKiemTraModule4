@@ -1,5 +1,6 @@
 package com.tung;
 
+import com.tung.concern.Logger;
 import com.tung.formatter.CategoryFormatter;
 import com.tung.service.*;
 import org.springframework.beans.BeansException;
@@ -54,6 +55,11 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
     public UserService userService(){return new UserServiceImpl();}
     @Bean
     public CategoryService categoryService(){return new CategoryServiceImpl();}
+
+    @Bean
+    public Logger logger() {
+        return new Logger();
+    }
 
 
 
